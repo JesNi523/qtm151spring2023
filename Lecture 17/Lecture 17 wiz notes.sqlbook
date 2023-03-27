@@ -189,7 +189,9 @@ with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
 
-SELECT drivers_nationality drivers_driver_id FROM drivers
+SELECT drivers_nationality drivers_driver_id FROM drivers;
+SELECT drivers_deriver_id FROM drivers;
+#?????
 WHERE victoies >=60
 
 
