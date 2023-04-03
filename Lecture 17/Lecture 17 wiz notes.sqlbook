@@ -58,6 +58,8 @@ CREATE TABLE drivers(
     nationality varchar(15),
     victories int
 );    
+
+
 -- SQLBook: Markup
 <font size="5"> 
 

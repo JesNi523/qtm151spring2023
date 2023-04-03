@@ -33,10 +33,11 @@ HINT: Include any column names with upper case in doube quotations, <br> e.g.
 -- Write your own code
 
 --drop
-DROP TABLE IF EXISTS laps_times;
-CREATE TABLE laps_times(
-        raceId        int,
-        driverId      int,
+DROP TABLE IF EXISTS lap_times;
+
+CREATE TABLE lap_times(
+        "raceId"        int,
+        "driverId"      int,
         lap           int,
         position      int,
         time          varchar(255),
@@ -44,12 +45,9 @@ CREATE TABLE laps_times(
 );
 
 -- import
-COPY laps_times
-FROM 'data_raw\lap_times.csv'
+COPY lap_times
+FROM 'C:\Users\dell\Documents\GitHub\qtm151spring2023\Assignment 8\data_raw\lap_times.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
-
-
-
 
 
 -- SQLBook: Markup
@@ -66,9 +64,24 @@ and  import the data from "data_raw/drivers.csv"
 -- SQLBook: Code
 -- Write your own code
 
+DROP TABLE IF EXISTS drivers;
 
+CREATE TABLE drivers(
+        "driverId"       int,
+        "driverRef"      varchar(255),
+        number           varchar(255),
+        code            varchar(3),
+        forename        varchar(255),
+        surname         varchar(255),
+        dob             varchar(255),
+        nationality     varchar(255),
+        url             varchar(255)
+);
 
-
+-- import
+COPY drivers
+FROM 'C:\Users\dell\Documents\GitHub\qtm151spring2023\Assignment 8\data_raw\drivers.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 -- SQLBook: Markup
 <font size = "5">
@@ -90,8 +103,9 @@ Hints:
 
 -- SQLBook: Code
 -- Write your own code
-
-
+SELECT* FROM drivers
+WHERE (nationality='American')
+ORDER BY surname ASC;
 
 -- SQLBook: Markup
 <font size = "5">
@@ -109,7 +123,9 @@ upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
 
-
+SELECT COUNT(DISTINCT "driverId") AS num_distinct_drivers,
+       COUNT(*) AS num_members       
+FROM drivers
 
 -- SQLBook: Markup
 <font size = "5">
@@ -127,8 +143,12 @@ upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
 
-
-
+SELECT "driverId",
+    AVG("driverId") AS mean_driverid, 
+    SUM(milliseconds) AS sum_milliseconds
+FROM lap_times
+GROUP BY "driverId"
+ORDER BY sum_milliseconds ASC;
 -- SQLBook: Markup
 <font size = "5">
 
@@ -145,5 +165,10 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
+
+SELECT *
+FROM "lap_times"
+LEFT JOIN drivers
+ON lap_times."driverId" = drivers."driverId"
 
 

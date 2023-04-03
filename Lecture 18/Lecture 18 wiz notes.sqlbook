@@ -187,6 +187,7 @@ Try it yourself!
 SELECT * FROM bills_actions
 ```
 -- SQLBook: Code
+-- Active: 1680035500355@@127.0.0.1@5432@postgres
 -- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
@@ -195,9 +196,11 @@ SELECT * FROM bills_actions
 -- FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
 -- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
-SELECT bills_actions
+COPY bills_actions 
 FROM 'C:\Users\dell\Documents\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+SELECT * FROM bills_actions;
 
 -- SQLBook: Markup
 <font size = "5">
